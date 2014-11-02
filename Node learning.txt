@@ -1,0 +1,18 @@
+Node learning
+
+Node uses a single thread for ALL requests that it handles. 
+Therefore, if any one request from any one user is slow, it could block 
+the whole machine. e.g. in example below, 
+database query could bomb the whole machine:
+
+	var result = database.query("SELECT * FROM hugetable");
+	console.log("Hello World");
+
+To avoid this problem, Node uses event-driven, asynch callbacks. What that means is that we pass Node a function to call (callback) when it finishes a heavy operation. 
+
+Once main thread executes all statements, it enters the event loop, which has any callbacks that are returned from other processes that were spawned off.
+
+Basically the principle is "don't do heavy shit on the main thread"
+
+Objects in javascript are just dictionaries with string keys.
+
